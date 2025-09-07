@@ -83,40 +83,6 @@ ML/Classical Model (Residual Correction) → Final Predictions
 Evaluation (MAPE) → Model Comparison
 ```
 
-### **Implementation Structure**
-```
-├── data/
-│   ├── climate_trace_india/        # Raw Climate TRACE data
-│   ├── processed/                  # Cleaned and preprocessed data
-│   └── sector_data/               # Seven-sector breakdown
-├── src/
-│   ├── preprocessing/
-│   │   ├── data_cleaning.py       # Missing value handling
-│   │   ├── feature_engineering.py # Lag features creation
-│   │   └── imputation.py          # Distribution-aware imputation
-│   ├── models/
-│   │   ├── classical/             # ARIMA, SARIMA, Holt-Winters, Prophet
-│   │   ├── machine_learning/      # RF, GB, XGBoost, SVR
-│   │   ├── pinns/                 # Physics-Informed Neural Networks
-│   │   └── hybrid/                # PINN + ML/Classical combinations
-│   ├── evaluation/
-│   │   ├── metrics.py             # MAPE calculation
-│   │   └── model_comparison.py    # Performance benchmarking
-│   └── utils/
-│       ├── sector_analysis.py     # Seven-sector processing
-│       └── visualization.py       # Results plotting
-├── notebooks/
-│   ├── exploratory_analysis.ipynb
-│   ├── model_training.ipynb
-│   └── results_analysis.ipynb
-├── results/
-│   ├── model_performance/         # MAPE scores and comparisons
-│   ├── forecasts/                 # 2024-2025 predictions
-│   └── sector_analysis/           # Per-sector results
-└── config/
-    ├── model_configs.yaml         # Hyperparameters
-    └── data_config.yaml           # Data processing settings
-```
 
 ## 🚀 Getting Started
 
@@ -130,50 +96,6 @@ xgboost
 pandas, numpy, matplotlib, seaborn
 ```
 
-### **Installation**
-```bash
-# Clone repository
-git clone <repository-url>
-cd carbon-emissions-forecasting
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Install additional PINN dependencies
-pip install tensorflow torch fbprophet xgboost climatetrace-api
-```
-
-### **Quick Start**
-```python
-from src.models.hybrid.pinn_prophet import PINNProphetHybrid
-from src.preprocessing.data_cleaning import load_climate_trace_data
-
-# Load India emissions data (Jan 2021 - May 2025)
-data = load_climate_trace_data('data/climate_trace_india/')
-
-# Initialize hybrid model
-model = PINNProphetHybrid()
-
-# Train on 2021-2023, test on 2024-2025
-model.fit(data['2021':'2023'])
-predictions = model.predict(data['2024':'2025'])
-
-# Evaluate performance
-mape = model.calculate_mape(predictions, actual)
-print(f"PINN + Prophet MAPE: {mape:.2f}%")
-```
-
-## 🏭 Sector-Specific Analysis
-
-The framework provides detailed analysis across seven key sectors:
-
-- **Power Generation**: Captures seasonal demand patterns
-- **Transportation**: Models traffic and fuel consumption trends  
-- **Manufacturing**: Handles production cycle variations
-- **Buildings**: Accounts for heating/cooling seasonality
-- **Agriculture**: Models crop cycle emissions
-- **Fossil Fuels**: Tracks extraction and processing patterns
-- **Waste Management**: Captures disposal and treatment trends
 
 ## 🎯 Key Contributions
 
@@ -183,12 +105,6 @@ The framework provides detailed analysis across seven key sectors:
 3. **Missing Data Handling**: Distribution-aware imputation for ESG reporting challenges
 4. **Mixed-Type Processing**: Ordinal mapping for qualitative emission indicators
 
-### **Practical Applications**
-- **ESG Compliance**: Enhanced emission forecasting for corporate sustainability
-- **Policy Planning**: National-level insights for climate goal achievement
-- **Industry Forecasting**: Sector-specific emission trend analysis
-- **Carbon Transparency**: Improved accuracy for emission reporting
-
 ## 📊 Impact & Applications
 
 This hybrid modeling framework demonstrates how national-level emissions data can be leveraged for industry-level forecasting, enabling organizations to:
@@ -197,30 +113,3 @@ This hybrid modeling framework demonstrates how national-level emissions data ca
 - 📈 **Plan targeted reductions** based on sector-specific patterns  
 - ✅ **Strengthen ESG compliance** through accurate forecasting
 - 🌱 **Accelerate sustainable development** via AI-driven insights
-
-## 📝 Citation
-
-If you use this work, please cite:
-```bibtex
-@article{carbon_emissions_hybrid_2025,
-  title={Physics-Informed Hybrid Modeling for Carbon Emissions Forecasting},
-  author={[Your Name]},
-  journal={[Journal Name]},
-  year={2025}
-}
-```
-
-## 📄 License
-
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **Climate TRACE** for comprehensive emissions data
-- **Physics-Informed Neural Networks** research community
-- **Facebook Prophet** and **XGBoost** development teams
-- **ESG reporting standards** organizations
-
----
-
-**Advancing carbon transparency through hybrid AI modeling for sustainable development** 🌱
